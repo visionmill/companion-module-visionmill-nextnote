@@ -1,0 +1,28 @@
+{
+	"$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
+	"type": "connection",
+	"id": "visionmill-nextnote",
+	"name": "Visionmill: NextNote Display",
+	"shortname": "NextNote",
+	"description": "Control NextNote Display presentation software. Slide navigation, teleprompter scrolling, pointer control, layout switching, and helper selection via OSC.",
+	"version": "1.0.0",
+	"license": "MIT",
+	"repository": "git+https://github.com/visionmill/companion-module-visionmill-nextnote.git",
+	"bugs": "https://github.com/visionmill/companion-module-visionmill-nextnote/issues",
+	"maintainers": [
+		{
+			"name": "Jonathan Bond",
+			"email": "jonathan@visionmill.co.uk"
+		}
+	],
+	"runtime": {
+		"type": "node22",
+		"api": "nodejs-ipc",
+		"apiVersion": "2.0.0",
+		"entrypoint": "../dist/main.js"
+	},
+	"legacyIds": [],
+	"manufacturer": "Visionmill",
+	"products": ["NextNote Display"],
+	"keywords": ["nextnote", "presentation", "osc", "teleprompter", "slides"]
+}
