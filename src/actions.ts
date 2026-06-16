@@ -12,12 +12,12 @@ export function getActions(instance: NextNoteInstance): CompanionActionDefinitio
 			options: [],
 			callback: () => instance.sendOSC('/nextnote/Above'),
 		},
-layout_side: {
+		layout_side: {
 			name: 'Layout: Slides Left, Notes Right',
 			options: [],
 			callback: () => instance.sendOSC('/nextnote/Left'),
 		},
-layout_below: {
+		layout_below: {
 			name: 'Layout: Slides Below Notes',
 			options: [],
 			callback: () => instance.sendOSC('/nextnote/Below'),
@@ -83,7 +83,7 @@ layout_below: {
 		},
 
 		// MARK: - Teleprompter Scroll
-scroll_up: {
+		scroll_up: {
 			name: 'Scroll: Up (press again to increase speed, max speed 9)',
 			options: [],
 			callback: () => instance.sendOSC('/nextnote/Up'),
@@ -112,7 +112,7 @@ scroll_up: {
 						callback: () => instance.sendOSC(`/nextnote/speakerlayout${n}`),
 					},
 				]
-			})
+			}),
 		),
 
 		// MARK: - Helper Selection

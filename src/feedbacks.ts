@@ -65,12 +65,12 @@ export function getFeedbacks(instance: NextNoteInstance): CompanionFeedbackDefin
 					id: 'layout',
 					label: 'Layout',
 					default: 'above',
-choices: [
-						{ id: 'above',       label: 'Slides Above Notes' },
-						{ id: 'left',        label: 'Slides Left, Notes Right' },
-						{ id: 'below',       label: 'Slides Below Notes' },
-						{ id: 'right',       label: 'Notes Left, Slides Right' },
-						{ id: 'notes',       label: 'Notes Only' },
+					choices: [
+						{ id: 'above', label: 'Slides Above Notes' },
+						{ id: 'left', label: 'Slides Left, Notes Right' },
+						{ id: 'below', label: 'Slides Below Notes' },
+						{ id: 'right', label: 'Notes Left, Slides Right' },
+						{ id: 'notes', label: 'Notes Only' },
 					],
 				},
 			],
@@ -116,8 +116,7 @@ choices: [
 					allowCustom: true,
 				},
 			],
-			callback: (feedback) =>
-				instance.state.connectedHelper === (feedback.options['helperName'] as string),
+			callback: (feedback) => instance.state.connectedHelper === (feedback.options['helperName'] as string),
 		},
 
 		// MARK: - Media state feedbacks (one set per slot, 1–6)
@@ -126,35 +125,44 @@ choices: [
 			Array.from({ length: 6 }, (_, i) => {
 				const n = i + 1
 				return [
-					[`media${n}_state_playing`, {
-						type: 'boolean' as const,
-						name: `Media ${n}: Is Playing`,
-						description: `True when media slot ${n} state is 'playing'`,
-						defaultStyle: { bgcolor: combineRgb(0, 180, 0), color: combineRgb(255, 255, 255) },
-						options: [],
-						callback: () => instance.state.mediaStates[n] === 'playing',
-					}],
-					[`media${n}_state_paused`, {
-						type: 'boolean' as const,
-						name: `Media ${n}: Is Paused`,
-						description: `True when media slot ${n} state is 'paused'`,
-						defaultStyle: { bgcolor: combineRgb(255, 140, 0), color: combineRgb(255, 255, 255) },
-						options: [],
-						callback: () => instance.state.mediaStates[n] === 'paused',
-					}],
-					[`media${n}_state_inactive`, {
-						type: 'boolean' as const,
-						name: `Media ${n}: Is Ready or Finished`,
-						description: `True when media slot ${n} state is 'ready' or 'finished'`,
-						defaultStyle: { bgcolor: combineRgb(180, 0, 0), color: combineRgb(255, 255, 255) },
-						options: [],
-						callback: () => {
-							const s = instance.state.mediaStates[n]
-							return s === 'ready' || s === 'finished'
+					[
+						`media${n}_state_playing`,
+						{
+							type: 'boolean' as const,
+							name: `Media ${n}: Is Playing`,
+							description: `True when media slot ${n} state is 'playing'`,
+							defaultStyle: { bgcolor: combineRgb(0, 180, 0), color: combineRgb(255, 255, 255) },
+							options: [],
+							callback: () => instance.state.mediaStates[n] === 'playing',
 						},
-					}],
+					],
+					[
+						`media${n}_state_paused`,
+						{
+							type: 'boolean' as const,
+							name: `Media ${n}: Is Paused`,
+							description: `True when media slot ${n} state is 'paused'`,
+							defaultStyle: { bgcolor: combineRgb(255, 140, 0), color: combineRgb(255, 255, 255) },
+							options: [],
+							callback: () => instance.state.mediaStates[n] === 'paused',
+						},
+					],
+					[
+						`media${n}_state_inactive`,
+						{
+							type: 'boolean' as const,
+							name: `Media ${n}: Is Ready or Finished`,
+							description: `True when media slot ${n} state is 'ready' or 'finished'`,
+							defaultStyle: { bgcolor: combineRgb(180, 0, 0), color: combineRgb(255, 255, 255) },
+							options: [],
+							callback: () => {
+								const s = instance.state.mediaStates[n]
+								return s === 'ready' || s === 'finished'
+							},
+						},
+					],
 				]
-			}).flat(1)
+			}).flat(1),
 		),
 	}
 }

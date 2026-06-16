@@ -9,6 +9,7 @@ import {
 	type CompanionActionSchema,
 	type CompanionFeedbackSchema,
 	type CompanionOptionValues,
+	type SomeCompanionConfigField,
 	type CompanionVariableValues,
 	type DropdownChoice,
 	type InstanceTypes,
@@ -30,10 +31,10 @@ export interface NextNoteState {
 	slideTotalCount: number
 	connectedHelper: string
 	knownHelpers: string[]
-	currentMemorySlot: number               // 0 = none active, 1–20 = active slot
-	currentLayout: string                   // 'above' | 'side' | 'notes'
+	currentMemorySlot: number // 0 = none active, 1–20 = active slot
+	currentLayout: string // 'above' | 'side' | 'notes'
 	memorySlotNames: Record<number, string> // slot id → name ('': unoccupied)
-	mediaStates: Record<number, string>     // slot id → 'playing' | 'paused' | 'stopped' | ''
+	mediaStates: Record<number, string> // slot id → 'playing' | 'paused' | 'stopped' | ''
 }
 
 type OSCArg = string | number
@@ -82,7 +83,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 		this.startFeedbackListener()
 		this.updateStatus(InstanceStatus.Ok)
 
-// Request full state from NextNote after a short delay to allow UDP bind to complete
+		// Request full state from NextNote after a short delay to allow UDP bind to complete
 		// 3000ms gives the UDP socket time to fully bind before Swift responds
 		setTimeout(() => this.requestStateFromNextNote(), 3000)
 	}
@@ -97,11 +98,11 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 		setTimeout(() => this.requestStateFromNextNote(), 3000)
 	}
 
-	getConfigFields() {
+	getConfigFields(): SomeCompanionConfigField[] {
 		return getConfigFields()
 	}
 
-// MARK: - State Request
+	// MARK: - State Request
 
 	/**
 	 * Send a RequestState command to NextNote — triggers sendFullFeedback on the Swift side.
@@ -280,14 +281,14 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 				const mediaMatch = address.match(/^\/nextnote\/feedback\/media(\d+)_(name|state|duration|remaining)$/)
 				if (mediaMatch) {
 					const mediaID = parseInt(mediaMatch[1], 10)
-					const field   = mediaMatch[2]
+					const field = mediaMatch[2]
 					if (mediaID >= 1 && mediaID <= 6) {
 						if (field === 'duration' || field === 'remaining') {
 							const secs = typeof value === 'number' ? Math.round(value) : 0
-							const fmt  = `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}`
+							const fmt = `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}`
 							this.setVariableValues({
-								[`media${mediaID}_${field}`]:       secs,
-								[`media${mediaID}_${field}_fmt`]:   fmt,
+								[`media${mediaID}_${field}`]: secs,
+								[`media${mediaID}_${field}_fmt`]: fmt,
 							})
 						} else {
 							const strVal = typeof value === 'string' ? value : ''
@@ -297,7 +298,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 								this.state.mediaStates[mediaID] = strVal
 							}
 						}
-					// Trigger state feedbacks when state field updates
+						// Trigger state feedbacks when state field updates
 						if (field === 'state') {
 							this.checkFeedbacks(
 								`media${mediaID}_state_playing`,
@@ -333,27 +334,13 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 			connected_helper: '',
 			memory_slot: 0,
 			current_layout: 'above',
-			...Object.fromEntries(
-				Array.from({ length: 20 }, (_, i) => [`memory${i + 1}_name`, `Slot ${i + 1}`])
-			),
-			...Object.fromEntries(
-				Array.from({ length: 6 }, (_, i) => [`media${i + 1}_name`, ''])
-			),
-			...Object.fromEntries(
-				Array.from({ length: 6 }, (_, i) => [`media${i + 1}_state`, 'stopped'])
-			),
-			...Object.fromEntries(
-				Array.from({ length: 6 }, (_, i) => [`media${i + 1}_duration`, 0])
-			),
-			...Object.fromEntries(
-				Array.from({ length: 6 }, (_, i) => [`media${i + 1}_duration_fmt`, '0:00'])
-			),
-			...Object.fromEntries(
-				Array.from({ length: 6 }, (_, i) => [`media${i + 1}_remaining`, 0])
-			),
-			...Object.fromEntries(
-				Array.from({ length: 6 }, (_, i) => [`media${i + 1}_remaining_fmt`, '0:00'])
-			),
+			...Object.fromEntries(Array.from({ length: 20 }, (_, i) => [`memory${i + 1}_name`, `Slot ${i + 1}`])),
+			...Object.fromEntries(Array.from({ length: 6 }, (_, i) => [`media${i + 1}_name`, ''])),
+			...Object.fromEntries(Array.from({ length: 6 }, (_, i) => [`media${i + 1}_state`, 'stopped'])),
+			...Object.fromEntries(Array.from({ length: 6 }, (_, i) => [`media${i + 1}_duration`, 0])),
+			...Object.fromEntries(Array.from({ length: 6 }, (_, i) => [`media${i + 1}_duration_fmt`, '0:00'])),
+			...Object.fromEntries(Array.from({ length: 6 }, (_, i) => [`media${i + 1}_remaining`, 0])),
+			...Object.fromEntries(Array.from({ length: 6 }, (_, i) => [`media${i + 1}_remaining_fmt`, '0:00'])),
 		}
 		this.setVariableValues(values)
 	}

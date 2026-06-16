@@ -25,7 +25,7 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 		bgcolor: number,
 		actionId?: string,
 		feedbacks: any[] = [],
-		size = '14'
+		size = '14',
 	) => ({
 		type: 'simple',
 		name,
@@ -43,11 +43,41 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 	]
 
 	// MARK: - Layout
-	presets.layout_above = simplePreset('Slides Above Notes', 'Above', combineRgb(40, 40, 80), 'layout_above', layoutFeedback('above'))
-	presets.layout_side = simplePreset('Slides Left Notes Right', 'Left', combineRgb(40, 40, 80), 'layout_side', layoutFeedback('left'))
-	presets.layout_below = simplePreset('Slides Below Notes', 'Below', combineRgb(40, 40, 80), 'layout_below', layoutFeedback('below'))
-	presets.layout_slidesright = simplePreset('Notes Left Slides Right', 'Right', combineRgb(40, 40, 80), 'layout_slidesright', layoutFeedback('right'))
-	presets.layout_notes = simplePreset('Notes Only', 'Notes', combineRgb(40, 40, 80), 'layout_notes', layoutFeedback('notes'))
+	presets.layout_above = simplePreset(
+		'Slides Above Notes',
+		'Above',
+		combineRgb(40, 40, 80),
+		'layout_above',
+		layoutFeedback('above'),
+	)
+	presets.layout_side = simplePreset(
+		'Slides Left Notes Right',
+		'Left',
+		combineRgb(40, 40, 80),
+		'layout_side',
+		layoutFeedback('left'),
+	)
+	presets.layout_below = simplePreset(
+		'Slides Below Notes',
+		'Below',
+		combineRgb(40, 40, 80),
+		'layout_below',
+		layoutFeedback('below'),
+	)
+	presets.layout_slidesright = simplePreset(
+		'Notes Left Slides Right',
+		'Right',
+		combineRgb(40, 40, 80),
+		'layout_slidesright',
+		layoutFeedback('right'),
+	)
+	presets.layout_notes = simplePreset(
+		'Notes Only',
+		'Notes',
+		combineRgb(40, 40, 80),
+		'layout_notes',
+		layoutFeedback('notes'),
+	)
 
 	// MARK: - Slide Navigation
 	presets.slide_first = simplePreset('First Slide', '|◀', combineRgb(30, 30, 30), 'slide_first', [], '24')
@@ -88,22 +118,70 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 		},
 		steps: [],
 		feedbacks: [
-			{ feedbackId: 'scroll_speed_match', options: { speed: 1 }, style: { bgcolor: combineRgb(0, 140, 0), color: combineRgb(255, 255, 255) } },
-			{ feedbackId: 'scroll_speed_match', options: { speed: 2 }, style: { bgcolor: combineRgb(0, 140, 0), color: combineRgb(255, 255, 255) } },
-			{ feedbackId: 'scroll_speed_match', options: { speed: 3 }, style: { bgcolor: combineRgb(180, 100, 0), color: combineRgb(255, 255, 255) } },
-			{ feedbackId: 'scroll_speed_match', options: { speed: 4 }, style: { bgcolor: combineRgb(180, 100, 0), color: combineRgb(255, 255, 255) } },
-			{ feedbackId: 'scroll_speed_match', options: { speed: 5 }, style: { bgcolor: combineRgb(160, 0, 0), color: combineRgb(255, 255, 255) } },
-			{ feedbackId: 'scroll_speed_match', options: { speed: 6 }, style: { bgcolor: combineRgb(160, 0, 0), color: combineRgb(255, 255, 255) } },
-			{ feedbackId: 'scroll_speed_match', options: { speed: 7 }, style: { bgcolor: combineRgb(100, 0, 160), color: combineRgb(255, 255, 255) } },
-			{ feedbackId: 'scroll_speed_match', options: { speed: 8 }, style: { bgcolor: combineRgb(100, 0, 160), color: combineRgb(255, 255, 255) } },
-			{ feedbackId: 'scroll_speed_match', options: { speed: 9 }, style: { bgcolor: combineRgb(100, 0, 160), color: combineRgb(255, 255, 255) } },
+			{
+				feedbackId: 'scroll_speed_match',
+				options: { speed: 1 },
+				style: { bgcolor: combineRgb(0, 140, 0), color: combineRgb(255, 255, 255) },
+			},
+			{
+				feedbackId: 'scroll_speed_match',
+				options: { speed: 2 },
+				style: { bgcolor: combineRgb(0, 140, 0), color: combineRgb(255, 255, 255) },
+			},
+			{
+				feedbackId: 'scroll_speed_match',
+				options: { speed: 3 },
+				style: { bgcolor: combineRgb(180, 100, 0), color: combineRgb(255, 255, 255) },
+			},
+			{
+				feedbackId: 'scroll_speed_match',
+				options: { speed: 4 },
+				style: { bgcolor: combineRgb(180, 100, 0), color: combineRgb(255, 255, 255) },
+			},
+			{
+				feedbackId: 'scroll_speed_match',
+				options: { speed: 5 },
+				style: { bgcolor: combineRgb(160, 0, 0), color: combineRgb(255, 255, 255) },
+			},
+			{
+				feedbackId: 'scroll_speed_match',
+				options: { speed: 6 },
+				style: { bgcolor: combineRgb(160, 0, 0), color: combineRgb(255, 255, 255) },
+			},
+			{
+				feedbackId: 'scroll_speed_match',
+				options: { speed: 7 },
+				style: { bgcolor: combineRgb(100, 0, 160), color: combineRgb(255, 255, 255) },
+			},
+			{
+				feedbackId: 'scroll_speed_match',
+				options: { speed: 8 },
+				style: { bgcolor: combineRgb(100, 0, 160), color: combineRgb(255, 255, 255) },
+			},
+			{
+				feedbackId: 'scroll_speed_match',
+				options: { speed: 9 },
+				style: { bgcolor: combineRgb(100, 0, 160), color: combineRgb(255, 255, 255) },
+			},
 		],
 	}
 
 	// MARK: - Info display buttons
-	presets.display_presentation = simplePreset('Presentation Name', 'Filename:\n$(visionmill-nextnote:presentation_name)', combineRgb(20, 20, 60))
-	presets.display_slide = simplePreset('Current Slide', 'Slide:\n$(visionmill-nextnote:slide_current)/$(visionmill-nextnote:slide_total)', combineRgb(20, 20, 60))
-	presets.display_build = simplePreset('Current Build', 'Build:\n$(visionmill-nextnote:build_current)/$(visionmill-nextnote:build_total)', combineRgb(20, 20, 60))
+	presets.display_presentation = simplePreset(
+		'Presentation Name',
+		'Filename:\n$(visionmill-nextnote:presentation_name)',
+		combineRgb(20, 20, 60),
+	)
+	presets.display_slide = simplePreset(
+		'Current Slide',
+		'Slide:\n$(visionmill-nextnote:slide_current)/$(visionmill-nextnote:slide_total)',
+		combineRgb(20, 20, 60),
+	)
+	presets.display_build = simplePreset(
+		'Current Build',
+		'Build:\n$(visionmill-nextnote:build_current)/$(visionmill-nextnote:build_total)',
+		combineRgb(20, 20, 60),
+	)
 
 	// MARK: - Memory slot recall presets (slots 1–20)
 	const memoryPresetIds: string[] = []
@@ -208,10 +286,30 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 			id: 'main',
 			name: 'NextNote',
 			definitions: [
-				{ id: 'layout', name: 'Layout', type: 'simple', presets: ['layout_above', 'layout_side', 'layout_below', 'layout_slidesright', 'layout_notes'] },
-				{ id: 'slides', name: 'Slides', type: 'simple', presets: ['slide_first', 'slide_previous', 'slide_next', 'slide_last', 'slide_hide', 'slide_show'] },
-				{ id: 'prompter', name: 'Prompter', type: 'simple', presets: ['pointer_toggle', 'scroll_up', 'scroll_stop', 'scroll_down', 'display_speed'] },
-				{ id: 'info', name: 'Info', type: 'simple', presets: ['display_presentation', 'display_slide', 'display_build'] },
+				{
+					id: 'layout',
+					name: 'Layout',
+					type: 'simple',
+					presets: ['layout_above', 'layout_side', 'layout_below', 'layout_slidesright', 'layout_notes'],
+				},
+				{
+					id: 'slides',
+					name: 'Slides',
+					type: 'simple',
+					presets: ['slide_first', 'slide_previous', 'slide_next', 'slide_last', 'slide_hide', 'slide_show'],
+				},
+				{
+					id: 'prompter',
+					name: 'Prompter',
+					type: 'simple',
+					presets: ['pointer_toggle', 'scroll_up', 'scroll_stop', 'scroll_down', 'display_speed'],
+				},
+				{
+					id: 'info',
+					name: 'Info',
+					type: 'simple',
+					presets: ['display_presentation', 'display_slide', 'display_build'],
+				},
 				{ id: 'memory', name: 'Memory', type: 'simple', presets: memoryPresetIds },
 				{ id: 'media', name: 'Media', type: 'simple', presets: mediaPresetIds },
 				...(helperPresetIds.length > 0

@@ -16,46 +16,40 @@ export function getVariableDefinitions(): CompanionVariableDefinitions {
 		build_current: { name: 'Current Build Number' },
 		build_total: { name: 'Total Build Count' },
 		...Object.fromEntries(
-			Array.from({ length: 20 }, (_, i) => [
-				`memory${i + 1}_name`,
-				{ name: `Memory Slot ${i + 1} Name` },
-			])
+			Array.from({ length: 20 }, (_, i) => [`memory${i + 1}_name`, { name: `Memory Slot ${i + 1} Name` }]),
 		),
 		...Object.fromEntries(
-			Array.from({ length: 6 }, (_, i) => [
-				`media${i + 1}_name`,
-				{ name: `Media ${i + 1} Clip Name` },
-			])
+			Array.from({ length: 6 }, (_, i) => [`media${i + 1}_name`, { name: `Media ${i + 1} Clip Name` }]),
 		),
 		...Object.fromEntries(
 			Array.from({ length: 6 }, (_, i) => [
 				`media${i + 1}_state`,
 				{ name: `Media ${i + 1} State (playing/paused/stopped)` },
-			])
+			]),
 		),
 		...Object.fromEntries(
 			Array.from({ length: 6 }, (_, i) => [
 				`media${i + 1}_duration`,
 				{ name: `Media ${i + 1} Total Duration (seconds)` },
-			])
+			]),
 		),
 		...Object.fromEntries(
 			Array.from({ length: 6 }, (_, i) => [
 				`media${i + 1}_duration_fmt`,
 				{ name: `Media ${i + 1} Total Duration (M:SS)` },
-			])
+			]),
 		),
 		...Object.fromEntries(
 			Array.from({ length: 6 }, (_, i) => [
 				`media${i + 1}_remaining`,
 				{ name: `Media ${i + 1} Remaining Time (seconds)` },
-			])
+			]),
 		),
 		...Object.fromEntries(
 			Array.from({ length: 6 }, (_, i) => [
 				`media${i + 1}_remaining_fmt`,
 				{ name: `Media ${i + 1} Remaining Time (M:SS)` },
-			])
+			]),
 		),
 	}
 }
