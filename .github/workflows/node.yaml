@@ -21,7 +21,6 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22.x
-          cache: 'yarn'
       - name: Prepare Environment
         run: corepack enable
       - name: Prepare Environment (For template repository)
