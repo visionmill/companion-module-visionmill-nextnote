@@ -21,10 +21,9 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22.x
+          cache: 'yarn'
       - name: Prepare Environment
-        run: |
-          corepack enable
-          corepack prepare yarn@4.17.0 --activate
+        run: corepack enable
       - name: Prepare Environment (For template repository)
         # Only run this step if the repository is a template repository
         # If you are using this in a module, you can remove this step
