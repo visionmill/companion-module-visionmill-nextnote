@@ -2,17 +2,44 @@ name: Companion Module Checks
 
 on:
   push:
+  pull_request:
 
 jobs:
   check:
-    name: Check module
-
-    if: ${{ !contains(github.repository, 'companion-module-template-') }}
+    name: Check module / Package module
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     permissions:
-      packages: read
+      contents: read
 
-    uses: bitfocus/actions/.github/workflows/module-checks.yaml@main
-    # with:
-    #   upload-artifact: true # uncomment this to upload the built package as an artifact to this workflow that you can download and share with others
+    steps:
+      - uses: actions/checkout@v5
 
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22.x
+
+      - name: Prepare environment
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+        env:
+          CI: true
+
+      - name: Lint
+        run: yarn lint
+        env:
+          CI: true
+
+      - name: Build
+        run: yarn build
+        env:
+          CI: true
+
+      - name: Package module
+        run: yarn package
+        env:
+          CI: true
