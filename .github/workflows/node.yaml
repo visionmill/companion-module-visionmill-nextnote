@@ -16,13 +16,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
+      - name: Prepare Environment
+        run: corepack enable
       - name: Use Node.js 22.x
         # This should match the version of Node.js you have defined in the manifest.json runtime field
         uses: actions/setup-node@v5
         with:
           node-version: 22.x
-      - name: Prepare Environment
-        run: corepack enable
       - name: Prepare Environment (For template repository)
         # Only run this step if the repository is a template repository
         # If you are using this in a module, you can remove this step
