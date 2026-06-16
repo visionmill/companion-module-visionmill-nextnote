@@ -108,18 +108,3 @@ This version targets **Companion module API 2.0** for Companion **4.3+**.
 | **Memory** | 20 recall buttons labelled with slot names, lights up when active |
 | **Media** | Name, remaining time, and runtime display for up to 6 clips, colour-coded by playback state |
 | **Helpers** | Auto-generated button per known helper, lights up when connected |
-
----
-
-## Development
-
-```bash
-yarn install     # install Companion API 2 dependencies
-yarn build       # compile TypeScript to dist/
-yarn package     # build distributable .tgz
-yarn dev         # watch mode — recompiles on file change
-```
-
-The packaged `.tgz` file can be installed in Companion via **Settings → Developer modules**.
-
-For official distribution, push this repository to GitHub, create a version tag such as `v1.0.0`, then submit that tag in the Bitfocus Developer Portal.
